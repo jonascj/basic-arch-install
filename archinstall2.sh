@@ -14,7 +14,7 @@ LANG="en_DK.UTF-8"
 LC_TIME="en_DK.UTF-8"
 EOF
 
-echo "KEYMAP=dk-qwerty" > /etc/vconsole.conf
+echo "KEYMAP=dk" > /etc/vconsole.conf
 
 # mkinitcpio
 sed -i 's/HOOKS="base udev autodetect modconf block filesystems keyboard fsck"/HOOKS="base udev autodetect modconf block lvm2 filesystems keyboard fsck"/' /etc/mkinitcpio.conf
