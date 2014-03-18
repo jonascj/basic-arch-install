@@ -21,9 +21,6 @@ sed -i 's/HOOKS="base udev autodetect modconf block filesystems keyboard fsck"/H
 
 mkinitcpio -p linux
 
-# password ...
-passwd 'pleaseboot'
-
 # bootloader
 pacman -S --noconfirm grub dosfstools efibootmgr
 mkdir /boot/efi
