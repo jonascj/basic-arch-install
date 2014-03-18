@@ -16,7 +16,7 @@ swapon /dev/vg00/lvswap
 
 ## Place the archinstall2.sh script
 ## at the root of the new filesystem
-cp ./archinstall2.sh /mnt/archinstall2.s
+cp ./archinstall2.sh /mnt/archinstall2.sh
 cp ./grub.cfg /mnt/grub.cfg
 chmod +x /mnt/archinstall2.sh
 
