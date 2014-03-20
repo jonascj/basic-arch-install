@@ -31,7 +31,7 @@ pacstrap /mnt base
 genfstab -p /mnt >> /mnt/etc/fstab
 
 #chroot and do the configuration in the chroot
-arch-chroot /mnt ./archinstall2.sh
+arch-chroot /mnt /archinstall2.sh
 
 # back from chroot
 # unmount and restart
