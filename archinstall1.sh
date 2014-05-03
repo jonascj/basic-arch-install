@@ -20,6 +20,10 @@ cp ./archinstall2.sh /mnt/archinstall2.sh
 cp ./grub.cfg /mnt/grub.cfg
 chmod +x /mnt/archinstall2.sh
 
+# Update mirror list before installing basesystem
+pacman --no-confirm -S reflector
+reflector -l 20 -p http --sort rate --save /etc/pacman.d/mirrorlist
+
 ## Install base system
 pacstrap /mnt base
 
