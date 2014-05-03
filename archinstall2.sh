@@ -16,12 +16,8 @@ EOF
 
 echo "KEYMAP=dk" > /etc/vconsole.conf
 
-# Mirrorlist
-pacman --no-confirm -S reflector
-reflector -l 20 -p http --sort rate --save /etc/pacman.d/mirrorlist
-
 # TRIM on lvm
-sed -i 's/issue_discards = 0/issue_discards = 1/' /etch/lvm/lvm.conf
+sed -i 's/issue_discards = 0/issue_discards = 1/' /etc/lvm/lvm.conf
 
 # mkinitcpio
 sed -i 's/HOOKS="base udev autodetect modconf block filesystems keyboard fsck"/HOOKS="base udev autodetect modconf block lvm2 filesystems keyboard fsck"/' /etc/mkinitcpio.conf
