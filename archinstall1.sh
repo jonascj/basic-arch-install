@@ -4,7 +4,7 @@
 mkfs.fat -F32 /dev/sda1
 mkfs.ext4 /dev/vg00/lvroot
 mkfs.ext4 /dev/vg00/lvhome
-
+mkswap /dev/vg00/lvswap
 
 
 ## Mount root, home and activate swap
