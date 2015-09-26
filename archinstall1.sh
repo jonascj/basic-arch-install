@@ -12,7 +12,7 @@ mkswap /dev/vg0/lv-swap
 mount -t ext4 /dev/vg0/lv-root /mnt
 mkdir /mnt/home
 mount -t ext4 /dev/vg0/lv-home /mnt/home
-swapon /dev/vg00/lvswap
+swapon /dev/vg0/lv-swap
 
 ## Mirrors
 echo '#Server = http://mirror.one.com/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
