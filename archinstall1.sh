@@ -2,26 +2,26 @@
 
 ## Format partitions
 mkfs.fat -F32 /dev/sda1
-mkfs.ext4 /dev/vg00/lvroot
-mkfs.ext4 /dev/vg00/lvhome
-mkswap /dev/vg00/lvswap
+mkfs.ext4 /dev/vg0/lv-root
+mkfs.ext4 /dev/vg0/lv-home
+mkswap /dev/vg0/lv-swap
+
 
 
 ## Mount root, home and activate swap
-mount -t ext4 /dev/vg00/lvroot /mnt
+mount -t ext4 /dev/vg0/lv-root /mnt
 mkdir /mnt/home
-mount -t ext4 /dev/vg00/lvhome /mnt/home
+mount -t ext4 /dev/vg0/lv-home /mnt/home
 swapon /dev/vg00/lvswap
 
+## Mirrors
+echo '#Server = http://mirror.one.com/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 
-## Update mirror list before installing basesystem
-## The updated mirror list file is copied to the installed system
-pacman --noconfirm -S reflector
-reflector -l 20 -p http --sort rate --save /etc/pacman.d/mirrorlist
 
 
 ## Install base system
 pacstrap /mnt base
+
 
 
 ## Configure the system

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # hostname
-echo "jonascj-pc" > /etc/hostname
+echo "jonascj-laptop" > /etc/hostname
 
 # locale and time
 ln -s /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime
@@ -33,10 +33,10 @@ cp /grub.cfg /boot/efi/EFI/grub/grub.cfg
 
 ## Some nice-to-have software
 
-pacman -S vim
+pacman -Syu vim
 
 # wifi-menu is from dialog
-pacman -S dialog
+pacman -Syu dialog
 
 
 # exit the chroot ot finish up
