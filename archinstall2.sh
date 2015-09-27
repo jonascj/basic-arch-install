@@ -33,10 +33,10 @@ cp /grub.cfg /boot/efi/EFI/grub/grub.cfg
 
 ## Some nice-to-have software
 
-pacman -Syu vim
+pacman -Syu --noconfirm vim
 
 # wifi-menu is from dialog
-pacman -Syu dialog
+pacman -Syu --noconfirm dialog
 
 
 # exit the chroot ot finish up
