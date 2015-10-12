@@ -10,12 +10,18 @@ mkswap /dev/vg0/lv-swap
 
 ## Mount root, home and activate swap
 mount -t ext4 /dev/vg0/lv-root /mnt
+
 mkdir /mnt/home
 mount -t ext4 /dev/vg0/lv-home /mnt/home
+
+mkdir -p /mnt/boot/efi
+mount -t vfat /dev/sda1 /mnt/boot/efi
+
 swapon /dev/vg0/lv-swap
 
+
 ## Mirrors
-echo '#Server = http://mirror.one.com/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
+echo 'Server = http://mirror.one.com/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 
 
 
