@@ -8,14 +8,14 @@ mkswap /dev/vg0/lv-swap
 
 
 
-## Mount root, home and activate swap
+## Mount and activate swap
 mount -t ext4 /dev/vg0/lv-root /mnt
 
 mkdir /mnt/home
 mount -t ext4 /dev/vg0/lv-home /mnt/home
 
-mkdir -p /mnt/boot/efi
-mount -t vfat /dev/sda1 /mnt/boot/efi
+mkdir -p /mnt/boot/efisys
+mount -t vfat /dev/sda1 /mnt/boot/efisys
 
 swapon /dev/vg0/lv-swap
 

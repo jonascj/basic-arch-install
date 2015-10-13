@@ -26,8 +26,8 @@ mkinitcpio -p linux
 
 # bootloader
 pacman -S --noconfirm grub dosfstools efibootmgr
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --boot-directory=/boot/efi/EFI --recheck --debug
-cp /grub.cfg /boot/efi/EFI/grub/grub.cfg
+grub-install --target=x86_64-efi --efi-directory=/boot/efisys --bootloader-id=grub --recheck --debug
+cp /grub.cfg /boot/grub/grub.cfg
 
 
 ## Some nice-to-have software
