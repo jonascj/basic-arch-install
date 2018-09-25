@@ -3,6 +3,7 @@ set -x
 set -e
 
 ## Format partitions
+## Change these to match your layout
 mkfs.fat -F32 /dev/sda1
 mkfs.ext4 /dev/vg0/lv-root
 mkfs.ext4 /dev/vg0/lv-home
@@ -22,6 +23,7 @@ swapon /dev/vg0/lv-swap
 
 
 ## Mirrors
+## Change this to a mirror of your choice
 echo 'Server = http://mirror.one.com/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 
 

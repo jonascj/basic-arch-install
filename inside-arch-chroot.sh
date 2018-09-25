@@ -3,6 +3,7 @@ set -x
 set -e
 
 # hostname
+# Change this to a hostname of your choice
 echo "jonascj-laptop" > /etc/hostname
 
 # locale and time
