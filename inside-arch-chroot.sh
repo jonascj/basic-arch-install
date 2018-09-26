@@ -1,14 +1,23 @@
 #!/bin/bash
+# Print commands, after expansion but before execution, to stderr 
 set -x
+# Exit shell on errors
 set -e
 
-# hostname
-# Change this to a hostname of your choice
+
+
+#------------------------------------------------------------------------------#
+# Hostname, locale, time, keymap
+#------------------------------------------------------------------------------#
+
+# Hostname
 echo "jonascj-laptop" > /etc/hostname
 
-# locale and time
+# Set local time zone
 ln -s /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime
+hwclock --systohc
 
+# Set locale
 sed -i 's/#en_DK.UTF-8 UTF-8/en_DK.UTF-8 UTF-8/' /etc/locale.gen
 locale-gen
 
@@ -17,45 +26,57 @@ LANG="en_DK.UTF-8"
 LC_TIME="en_DK.UTF-8"
 EOF
 
+# Set permanent keymap (for the console)
 echo "KEYMAP=dk" > /etc/vconsole.conf
 
-# TRIM on lvm
-sed -i 's/issue_discards = 0/issue_discards = 1/' /etc/lvm/lvm.conf
 
+
+#------------------------------------------------------------------------------#
 # mkinitcpio
-sed -i 's/HOOKS="base udev autodetect modconf block filesystems keyboard fsck"/HOOKS="base udev autodetect modconf block lvm2 filesystems keyboard fsck"/' /etc/mkinitcpio.conf
-
+#------------------------------------------------------------------------------#
 mkinitcpio -p linux
 
-# bootloader
-pacman -S --noconfirm grub dosfstools efibootmgr
-grub-install --target=x86_64-efi --efi-directory=/boot/efisys --bootloader-id=grub --recheck --debug
-cp /grub.cfg /boot/grub/grub.cfg
 
 
-## ADDITIONAL CONFIGURATION (BASE INSTALL IS COMPLETE)
+#------------------------------------------------------------------------------#
+# Bootloader 
+#------------------------------------------------------------------------------#
+pacman -S --noconfirm grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub 
+grub-mkconfig -o /boot/grub/grub.cfg
 
 
-pacman -Syu --noconfirm vim git base-devel
 
-# wifi-menu is from dialog
-pacman -Syu --noconfirm dialog
+#------------------------------------------------------------------------------#
+# User setup
+#------------------------------------------------------------------------------#
 
-# User, sudo and lock root
-pacman -Syu --noconfirm sudo
+# Add user, setup sudo 
+pacman -Syu --noconfirm sudo zsh
 groupadd sudo
-useradd -m -G sudo -s /bin/bash jonas
-passwd jonas
-useradd -m -G sudo -s /bin/bash test
-
 sed -i 's/# %sudo/%sudo/g' /etc/sudoers
+
+useradd -m -G sudo -s /bin/zsh jonas
+passwd jonas
+
+# Lock root user
 passwd -l root
 
-# disable pc speaker
+
+
+#------------------------------------------------------------------------------#
+# Additional configuration
+#------------------------------------------------------------------------------#
+
+# Disable pc speaker
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
-# dhcp for wired interface
-systemctl enable dhcpcd@enp0s25
+# Additional packages are nice to have during further setup
+pacman -Syu --noconfirm vim git tree btrfs-progs
 
-# exit the chroot to finish up
+
+
+#------------------------------------------------------------------------------#
+# Exit chroot (let install.sh finish up)
+#------------------------------------------------------------------------------#
 exit
