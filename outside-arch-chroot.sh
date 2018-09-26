@@ -12,7 +12,7 @@ set -e
 # Make file systems
 mkfs.fat -F32 /dev/sda1
 mkswap /dev/sda2
-mkfs.btrfs /dev/sda3
+mkfs.btrfs -f /dev/sda3
 
 # Creating btrfs subvolumes
 mount /dev/sda3 /mnt

@@ -1,8 +1,6 @@
 #!/bin/bash
 # Print commands, after expansion but before execution, to stderr 
 set -x
-# Exit shell on errors
-set -e
 
 
 
